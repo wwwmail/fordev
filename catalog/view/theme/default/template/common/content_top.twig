@@ -1,0 +1,24 @@
+{% for key, module in modules %}
+
+    {% if key == 0 %}
+        {{ key }}
+        <div class="col-sm-12">
+            {{ module }}
+        </div>
+    {% elseif key == 1 %}
+        <div class="col-sm-9 image-text">
+            {{ module }}
+        </div>
+    {% elseif key == 2 %}
+        <div class="col-sm-3 image-text">
+            {{ module }}
+        </div>
+    {% else %}
+        {{ key }}
+        <div class="col-sm-12">
+            {{ module }}
+        </div>
+    {% endif %}
+
+    {#    {{ module }}#}
+{% endfor %}

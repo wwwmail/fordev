@@ -1,0 +1,49 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      {% if informations %}
+      <div class="col-sm-3">
+            <div><img src="/image/catalog/logo.png.pagespeed.ce.hTSWpdwI5M@2x.png"></div>
+            <div class=" delivery-block">
+                <div class="phone vertical-align"><i class="icone-phone"></i> <span>+38 (067) 352-57-58</span></div>
+                <div class="info"><span>Доставка по всей Украине!</span></div> 
+            </div>
+        </div>
+      {% endif %}
+      <div class="col-sm-3">
+        <ul class="list-unstyled">
+            <li>График работы call-центра:</li>
+            <li>Пн-Пт: с 9:00 до 19:00</li>
+            <li>Сб: с 9:00 до 15:00</li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <ul class="list-unstyled">
+            <li><a href="#" class="yellow-btn">Приминение удобрений</a></li>
+            <li><a href="/katalog" class="green-btn">{{ text_catalog }}</a></li>
+            <li><a href="#">Оплата и доставка</a></li>
+            <li><a href="#">Как выбрать удобрение?</a></li>
+            <li><a href="#">Акции и скидки</a></li>
+            <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+            <li><a href="#">О нас</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-sm-3">
+        <ul class="list-unstyled">
+
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p>{{ powered }}</p>
+  </div>
+</footer>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+</body></html>
