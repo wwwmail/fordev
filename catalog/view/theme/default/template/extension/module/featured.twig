@@ -5,10 +5,16 @@
             {% for product in products %}
                 <div class="product-layout swiper-slide col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="product-thumb transition product-card">
-                        <div class="image product-card-image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a><span class="product-card-articles">Артикул: <b>11021</b></span></div>
+                        <div class="image product-card-image"><a href="{{ product.href }}">
+                                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+                                {% if(product.sku) %}
+                                <span class="product-card-articles">{{ text_sku }}: <b>{{ product.sku }}</b>
+                                    {% endif %}
+                            </span>
+                        </div>
                         <div class="caption product-card-info">
                             <h4 class="product-card-title"><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                            
+
                             {% if product.rating %}
                                 <div class="rating">
                                     {% for i in 5 %}
@@ -26,16 +32,18 @@
                                         <div class="price">{{ product.price }}</div>
                                     {% else %}
                                         <div class="price-old">{{ product.price }}</div><div class="price-new">{{ product.special }}</div>
-                                    {% endif %}
-                                    
+                                        {% endif %}
+
                                 </div>
                             {% endif %}
                             <div class="product-card-right">
-                                <div class="product-card-reviews">11 отзывов</div>
+                                <div class="product-card-reviews">{{ product.reviews}} {{ text_reviews }}</div>
                                 <button class="product-card-cart" type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
                             </div>
                         </div>
-                        <div class="product-card-discount">-20%</div>
+                        {% if( product.discount) %}
+                            <div class="product-card-discount">-{{ product.discount}}%</div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

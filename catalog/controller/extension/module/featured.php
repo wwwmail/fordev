@@ -32,11 +32,30 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$price = false;
 					}
 
-					if ((float)$product_info['special']) {
+					if ((float)$product_info['special'] ) {
 						$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 					} else {
 						$special = false;
 					}
+                                        
+                                        if ((float)$product_info['special']  && !$this->config->get('config_customer_price') ) {
+                                            
+                                            $discount = 100 - ($product_info['special'] * 100) / $product_info['price'];
+                                        } else{
+                                            $discount = false;
+                                        }
+                                        
+                                        if($product_info['sku']){
+                                            $sku = $product_info['sku'];
+                                        }else{
+                                            $sku = false;
+                                        }
+                                        
+                                        if($product_info['reviews']){
+                                            $reviews = $product_info['reviews'];
+                                        }else{
+                                           $reviews = 0; 
+                                        }
 
 					if ($this->config->get('config_tax')) {
 						$tax = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
@@ -57,12 +76,18 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'description' => utf8_substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 						'price'       => $price,
 						'special'     => $special,
+                                                'discount'    => $discount,
+                                                'sku'         => $sku,
+                                                'reviews'     => $reviews,
 						'tax'         => $tax,
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
-					);
+					);                                        
 				}
 			}
+                        
+//                        echo '<pre>';
+//                                        var_dump($data['products']); die;
 		}
 
 		if ($data['products']) {
